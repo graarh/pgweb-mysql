@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jessevdk/go-flags"
-	_ "github.com/lib/pq"
 	"os"
 	"os/exec"
 	"os/signal"
@@ -17,11 +17,10 @@ var options struct {
 	Debug    bool   `short:"d" long:"debug" description:"Enable debugging mode" default:"false"`
 	Url      string `long:"url" description:"Database connection string"`
 	Host     string `long:"host" description:"Server hostname or IP" default:"localhost"`
-	Port     int    `long:"port" description:"Server port" default:"5432"`
-	User     string `long:"user" description:"Database user" default:"postgres"`
+	Port     int    `long:"port" description:"Server port" default:"3306"`
+	User     string `long:"user" description:"Database user" default:"root"`
 	Pass     string `long:"pass" description:"Password for user"`
-	DbName   string `long:"db" description:"Database name" default:"postgres"`
-	Ssl      string `long:"ssl" description:"SSL option" default:"disable"`
+	DbName   string `long:"db" description:"Database name" default:"mysql"`
 	HttpPort uint   `long:"listen" description:"HTTP server listen port" default:"8080"`
 }
 
@@ -38,15 +37,11 @@ func getConnectionString() string {
 	}
 
 	str := fmt.Sprintf(
-		"host=%s port=%d user=%s dbname=%s sslmode=%s",
+		"%s:%s@tcp(%s:%d)/%s",
+		options.User, options.Pass,
 		options.Host, options.Port,
-		options.User, options.DbName,
-		options.Ssl,
+		options.DbName,
 	)
-
-	if options.Pass != "" {
-		str += fmt.Sprintf(" password=%s", options.Pass)
-	}
 
 	return str
 }

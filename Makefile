@@ -10,6 +10,7 @@ build:
 	gox -osarch="darwin/amd64 darwin/386 linux/amd64 linux/386 windows/amd64 windows/386" -output="./bin/pgweb_{{.OS}}_{{.Arch}}"
 
 setup:
+	go get github.com/go-sql-driver/mysql
 	go get github.com/mitchellh/gox
 	go get github.com/jteeuwen/go-bindata/...
 	go-bindata -debug -ignore=\\.gitignore -ignore=\\.DS_Store -ignore=\\.gitkeep static/...

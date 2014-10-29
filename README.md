@@ -1,12 +1,14 @@
 # pgweb
 
-Web-based PostgreSQL database browser written in Go.
+Web-based Mysql database browser written in Go. 
+This is the fork of [pgweb](https://github.com/sosedoff/pgweb) project, 
+adapted for Mysql database.
 
-[![Build Status](https://travis-ci.org/sosedoff/pgweb.svg?branch=master)](https://travis-ci.org/sosedoff/pgweb)
+Many thanks to Dan for the original Postgres version.
 
 ## Overview
 
-This is a web-based browser for PostgreSQL database server. Its written in Go
+This is a web-based browser for Mysql database server. Its written in Go
 and works on Mac OSX, Linux and Windows machines. Main idea behind using Go for the backend
 is to utilize language's ability for cross-compile source code for multiple platforms. 
 This project is an attempt to create a very simple and portable application to work with 
@@ -25,62 +27,6 @@ Features:
 - View query history
 
 ## Installation
-
-Please visit [Github Releases](https://github.com/sosedoff/pgweb/releases) to download a 
-precompiled binary for your operating system.
-
-Currently supported:
-
-- Mac OSX 64bit
-- Linux 32/64bit
-- Windows 32/64bit
-
-Supported PostgreSQL versions:
-
-- 9.1
-- 9.2
-- 9.3
-
-Older versions of PostgreSQL might also work but this project is not tested on 
-8.x branches.
-
-## Usage
-
-Start server:
-
-```
-pgweb --host localhost --user myuser --db mydb
-```
-
-You can also specify a connection URI instead of individual flags:
-
-```
-pgweb --url postgres://user:password@host:port/database
-```
-
-It works great with [Heroku Postgres](https://postgres.heroku.com) if you need 
-to troubleshoot production database or simply run a few queries.
-
-Full CLI options:
-
-```
-Usage:
-  pgweb [OPTIONS]
-
-Application Options:
-  -v, --version  Print version
-  -d, --debug    Enable debugging mode (false)
-      --url=     Database connection string
-      --host=    Server hostname or IP (localhost)
-      --port=    Server port (5432)
-      --user=    Database user (postgres)
-      --pass=    Password for user
-      --db=      Database name (postgres)
-      --ssl=     SSL option (disable)
-      --listen=  HTTP server listen port (8080)
-```
-
-## Compile from source
 
 Go 1.3+ is required. You can install Go with `homebrew`:
 
@@ -106,13 +52,47 @@ make build
 Under the hood it uses [gox](https://github.com/mitchellh/gox). Compiled binaries
 will be stored into `./bin` directory.
 
+## Usage
+
+Start server:
+
+```
+pgweb --host localhost --user myuser --db mydb
+```
+
+You can also specify a connection URI instead of individual flags:
+
+```
+pgweb --url user:password@tcp(host:port)/database
+```
+
+Full CLI options:
+
+```
+Usage:
+  pgweb [OPTIONS]
+
+Application Options:
+  -v, --version  Print version
+  -d, --debug    Enable debugging mode (false)
+      --url=     Database connection string
+      --host=    Server hostname or IP (localhost)
+      --port=    Server port (5432)
+      --user=    Database user (mysql)
+      --pass=    Password for user
+      --db=      Database name (mysql)
+      --listen=  HTTP server listen port (8080)
+```
+
 ## Contributors
 
 - Dan Sosedoff - https://twitter.com/sosedoff
 - Masha Safina - https://twitter.com/mashasafina
+- Gennadiy Kovalev
 
 ## License
 
 The MIT License (MIT)
 
 Copyright (c) 2014 Dan Sosedoff, <dan.sosedoff@gmail.com>
+Changed by Gennadiy Kovalev, <graarh@weird.company>

@@ -122,24 +122,6 @@ function showTableIndexes() {
   });
 }
 
-function showTableInfo() {
-  var name = $("#tables li.selected").text();
-
-  if (name.length == 0) {
-    alert("Please select a table!");
-    return;
-  }
-
-  apiCall("get", "/tables/" + name + "/info", {}, function(data) {
-    $(".table-information ul").show();
-    $("#table_total_size").text(data.total_size);
-    $("#table_data_size").text(data.data_size);
-    $("#table_index_size").text(data.index_size);
-    $("#table_rows_count").text(data.rows_count);
-    $("#table_encoding").text("Unknown");
-  });
-}
-
 function showTableContent() {
   var name = $("#tables li.selected").text();
 
@@ -148,7 +130,7 @@ function showTableContent() {
     return;
   }
 
-  var query = "SELECT * FROM \"" + name + "\" LIMIT 100;";
+  var query = "SELECT * FROM `" + name + "` LIMIT 100;";
 
   executeQuery(query, function(data) {
     buildTable(data);
@@ -286,7 +268,6 @@ $(document).ready(function() {
     $("#tables li.selected").removeClass("selected");
     $(this).addClass("selected");
     showTableContent();
-    showTableInfo();
   });
 
   loadTables();
