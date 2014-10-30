@@ -10,7 +10,7 @@ import (
 	"os/signal"
 )
 
-const VERSION = "0.3.1"
+const VERSION = "0.1.1"
 
 var options struct {
 	Version  bool   `short:"v" long:"version" description:"Print version"`
@@ -93,10 +93,8 @@ func startServer() {
 
 	router.GET("/", API_Home)
 	router.GET("/databases", API_GetDatabases)
-	router.GET("/info", API_Info)
 	router.GET("/tables", API_GetTables)
 	router.GET("/tables/:table", API_GetTable)
-	router.GET("/tables/:table/info", API_GetTableInfo)
 	router.GET("/tables/:table/indexes", API_TableIndexes)
 	router.GET("/query", API_RunQuery)
 	router.POST("/query", API_RunQuery)

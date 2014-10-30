@@ -9,12 +9,10 @@ import (
 )
 
 const (
-	PG_INFO          = "STATUS;"
-	PG_DATABASES     = "SHOW DATABASES;"
-	PG_TABLES        = "SHOW TABLES;"
-	PG_TABLE_SCHEMA  = "SHOW CREATE TABLE `%s`;"
-	PG_TABLE_INDEXES = "SHOW INDEX IN `%s`;"
-	PG_TABLE_INFO    = "SHOW TABLE STATUS LIKE `%s`"
+	DATABASES     = "SHOW DATABASES;"
+	TABLES        = "SHOW TABLES;"
+	TABLE_SCHEMA  = "SHOW CREATE TABLE `%s`;"
+	TABLE_INDEXES = "SHOW INDEX IN `%s`;"
 )
 
 type Client struct {
@@ -49,12 +47,8 @@ func (client *Client) recordQuery(query string) {
 	client.history = append(client.history, query)
 }
 
-func (client *Client) Info() (*Result, error) {
-	return client.Query(PG_INFO)
-}
-
 func (client *Client) Databases() ([]string, error) {
-	res, err := client.Query(PG_DATABASES)
+	res, err := client.Query(DATABASES)
 
 	if err != nil {
 		return nil, err
@@ -70,7 +64,7 @@ func (client *Client) Databases() ([]string, error) {
 }
 
 func (client *Client) Tables() ([]string, error) {
-	res, err := client.Query(PG_TABLES)
+	res, err := client.Query(TABLES)
 
 	if err != nil {
 		return nil, err
@@ -86,15 +80,11 @@ func (client *Client) Tables() ([]string, error) {
 }
 
 func (client *Client) Table(table string) (*Result, error) {
-	return client.Query(fmt.Sprintf(PG_TABLE_SCHEMA, table))
-}
-
-func (client *Client) TableInfo(table string) (*Result, error) {
-	return client.Query(fmt.Sprintf(PG_TABLE_INFO, table, table, table, table))
+	return client.Query(fmt.Sprintf(TABLE_SCHEMA, table))
 }
 
 func (client *Client) TableIndexes(table string) (*Result, error) {
-	res, err := client.Query(fmt.Sprintf(PG_TABLE_INDEXES, table))
+	res, err := client.Query(fmt.Sprintf(TABLE_INDEXES, table))
 
 	if err != nil {
 		return nil, err

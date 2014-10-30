@@ -89,30 +89,8 @@ func API_GetTable(c *gin.Context) {
 	c.JSON(200, res)
 }
 
-func API_GetTableInfo(c *gin.Context) {
-	res, err := dbClient.TableInfo(c.Params.ByName("table"))
-
-	if err != nil {
-		c.JSON(400, NewError(err))
-		return
-	}
-
-	c.JSON(200, res.Format()[0])
-}
-
 func API_History(c *gin.Context) {
 	c.JSON(200, dbClient.history)
-}
-
-func API_Info(c *gin.Context) {
-	res, err := dbClient.Info()
-
-	if err != nil {
-		c.JSON(400, NewError(err))
-		return
-	}
-
-	c.JSON(200, res.Format()[0])
 }
 
 func API_TableIndexes(c *gin.Context) {
