@@ -232,6 +232,7 @@ function exportToCSV() {
 
 function initEditor() {
   editor = ace.edit("custom_query");
+  editor.setOptions({fontSize: "13pt"});
 
   editor.getSession().setMode("ace/mode/pgsql");
   editor.getSession().setTabSize(2);
