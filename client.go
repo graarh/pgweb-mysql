@@ -11,7 +11,7 @@ import (
 const (
 	DATABASES     = "SHOW DATABASES;"
 	TABLES        = "SHOW TABLES;"
-	TABLE_SCHEMA  = "SHOW CREATE TABLE `%s`;"
+	TABLE_SCHEMA  = "SHOW COLUMNS IN`%s`;"
 	TABLE_INDEXES = "SHOW INDEX IN `%s`;"
 )
 
