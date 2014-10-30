@@ -247,6 +247,12 @@ $(document).ready(function() {
   $("#table_history").on("click",   function() { showQueryHistory();   });
   $("#table_query").on("click",     function() { showQueryPanel();     });
 
+  $('#custom_query').keydown(function (e) {
+    if (e.ctrlKey && e.keyCode == 13) {
+      runQuery();
+    }
+  });
+
   $("#run").on("click", function() {
     runQuery();
   });
